@@ -8,7 +8,6 @@ const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
 
-
 // 2- Build out functions
 function togglePlay() {
   if (video.paused) {
@@ -60,4 +59,11 @@ toggle.addEventListener('click', togglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(slider => slider.addEventListener('change', handleRangeUpdate));
 video.addEventListener('timeupdate', handleProgressUpdate);
+
+let mousedown = false;
 progress.addEventListener('click', scrub);
+// checks mousedown variable - if true, it moves on to scrub(e)
+// if mousedown variable is false, it returns or stops there
+progress.addEventListener('mousemove', () => mousedown && scrub(e));
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
