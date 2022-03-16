@@ -24,8 +24,17 @@ function updateButton() {
 }
 
 function skip() {
-  console.log(this.dataset.skip);
+  // this.dataset.skip grabs whichever data-skip value corresponds to button
+  // currentTime tells player to skip at whatever time video is curently at
+  // += when it's a number + string = concatenation
+  // parseFloat converts string into true number
   video.currentTime += parseFloat(this.dataset.skip);
+}
+
+function handleRangeUpdate() {
+  // console.log(this.value);
+  // console.log(this.name);
+  video[this.name] = this.value;
 }
 
 
@@ -35,3 +44,4 @@ video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 toggle.addEventListener('click', togglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
+ranges.forEach(slider => slider.addEventListener('change', handleRangeUpdate));
