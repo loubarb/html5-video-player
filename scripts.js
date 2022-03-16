@@ -42,6 +42,15 @@ function handleProgressUpdate() {
   progressBar.style.flexBasis = `${percent}%`;
 }
 
+function scrub(e) {
+  // offsetX = pixel location of click location inside bar
+  // progress.offsetWidth = pixel width of bar - X & Width divided give a percent
+  // multiply by video duration to make number for time
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+  // console.log(e);
+}
+
 
 // 3- Hook up event listeners
 video.addEventListener('click', togglePlay);
@@ -51,3 +60,4 @@ toggle.addEventListener('click', togglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(slider => slider.addEventListener('change', handleRangeUpdate));
 video.addEventListener('timeupdate', handleProgressUpdate);
+progress.addEventListener('click', scrub);
